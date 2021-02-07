@@ -10,10 +10,14 @@ let bodyParser = require("body-parser");
 let { ExpressPeerServer } = require("peer");
 let uuid = require("uuid");
 
+let getClientId = () => {
+    return uuid.v4();
+};
+
 let peer = ExpressPeerServer(http, {
     debug: false,
     path: "/",
-    generateClientId: uuid.v4(),
+    generateClientId: getClientId(),
 });
 
 app.use(cors());
