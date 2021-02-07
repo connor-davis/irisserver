@@ -9,6 +9,8 @@ let cors = require("cors");
 app.use(cors());
 
 io.on("connection", (socket) => {
+    console.log("new connection.");
+
     socket.on("disconnect", () => {
 
     });
