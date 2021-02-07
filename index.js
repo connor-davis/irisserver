@@ -17,7 +17,7 @@ let getClientId = () => {
 let peer = ExpressPeerServer(http, {
     debug: false,
     path: "/",
-    generateClientId: getClientId(),
+    generateClientId: getClientId,
 });
 
 app.use(cors());
