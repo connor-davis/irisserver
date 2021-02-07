@@ -15,8 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 io.on("connection", (socket) => {
-    console.log("new connection.");
-
     socket.on("disconnect", () => {
 
     });
