@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
     });
 });
 
-let port = 8080 || process.env.PORT;
+let port = 4493 || process.env.PORT;
 
 (async () => {
     http.listen(port);
