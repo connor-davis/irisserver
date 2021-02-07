@@ -30,10 +30,13 @@ io.on("connection", (socket) => {
     socket.on("_peerInitialized", ({ id, peerId }) => {
         console.log(id, " - ", peerId);
         io.emit(`_${id}PeerId`, peerId);
+
+        socket._userId = id;
+        socket._peerId = peerId;
     });
 
     socket.on("disconnect", () => {
-
+        io.emit(`_${socket._userId}Disconnected`);
     });
 });
 
