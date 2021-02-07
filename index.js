@@ -8,6 +8,7 @@ let cors = require("cors");
 let morgan = require("morgan");
 
 app.use(cors());
+app.use(morgan('combined'))
 
 io.on("connection", (socket) => {
     console.log("new connection.");
