@@ -7,6 +7,7 @@ let io = require("socket.io")(http);
 let cors = require("cors");
 let morgan = require("morgan");
 let bodyParser = require("body-parser");
+let { ExpressPeerServer } = require("peer");
 
 app.use(cors());
 app.use(morgan('combined'));
