@@ -28,8 +28,7 @@ app.use("/p2p", peer);
 
 io.on("connection", (socket) => {
     socket.on("_peerInitialized", ({ id, peerId }) => {
-        console.log(id, " - ", peerId);
-        io.emit(`_${id}PeerId`, peerId);
+        io.emit(`_${id}Connected`, {peerId});
 
         socket._userId = id;
         socket._peerId = peerId;
