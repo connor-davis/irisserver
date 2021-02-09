@@ -11,36 +11,40 @@ let { ExpressPeerServer } = require("peer");
 let uuid = require("uuid");
 
 let getClientId = () => {
-    return uuid.v4();
+  return uuid.v4();
 };
 
 let peer = ExpressPeerServer(http, {
-    debug: false,
-    path: "/",
-    generateClientId: getClientId,
+  debug: false,
+  path: "/",
+  generateClientId: getClientId,
 });
 
 app.use(cors());
-app.use(morgan('combined'));
+app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/p2p", peer);
 
 io.on("connection", (socket) => {
-    socket.on("_peerInitialized", ({ id, peerId }) => {
-        io.emit(`_${id}Connected`, {peerId});
+  socket.on("_peerInitialized", ({ id, peerId }) => {
+    io.emit(`_${id}Connected`, { peerId });
 
-        socket._userId = id;
-        socket._peerId = peerId;
-    });
+    socket._userId = id;
+    socket._peerId = peerId;
+  });
 
-    socket.on("disconnect", () => {
-        io.emit(`_${socket._userId}Disconnected`);
-    });
+  socket.on("disconnect", () => {
+    io.emit(`_${socket._userId}Disconnected`);
+  });
+});
+
+app.get("/", (request, response) => {
+  response.send("Hello");
 });
 
 let port = 4493 || process.env.PORT;
 
 (async () => {
-    http.listen(port);
+  http.listen(port);
 })();
