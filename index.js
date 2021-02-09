@@ -27,11 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/p2p", peer);
 
 io.on("connection", (socket) => {
-  socket.on("_peerInitialized", ({ id, peerId }) => {
-    io.emit(`_${id}Connected`, { peerId });
-
+  socket.on("_peerInitialized", ({ id }) => {
+    io.emit(`_${id}Connected`);
     socket._userId = id;
-    socket._peerId = peerId;
   });
 
   socket.on("disconnect", () => {
