@@ -27,12 +27,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/p2p", peer);
 
 io.on("connection", (socket) => {
-  socket.on("_peerInitialized", ({ id }) => {
-    io.emit(`_${id}Connected`);
+  socket.on("_infoChange", ({ id, publicKey }) => {
+    io.emit(`_${id}InfoChange`, { id, publicKey });
     socket._userId = id;
   });
 
-  socket.on("_sendText", ({buffer, to}) => {
+  socket.on("_sendText", ({ buffer, to }) => {
     io.emit(`_${to}NewText`, buffer);
   });
 
