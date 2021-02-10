@@ -32,6 +32,10 @@ io.on("connection", (socket) => {
     socket._userId = id;
   });
 
+  socket.on("_sendText", ({buffer, to}) => {
+    io.emit(`_${to}NewText`, buffer);
+  });
+
   socket.on("disconnect", () => {
     io.emit(`_${socket._userId}Disconnected`);
   });
